@@ -1,0 +1,48 @@
+﻿<div class="calendar-note row" ng-controller="CalendarController">
+    <div class="calendar col-md-8">
+        <div class="calendar-header">
+            <button ng-click="previousMonth()">&larr;</button>
+            <div id="choosedate">
+                <div>{{ monthYear }}</div>
+                <input type="text" style="visibility:hidden;position:absolute"
+                       id="datepicker" ng-model="MonthYearChoosed" ng-change="ChooseMonthYear(dt)" />
+            </div>
+            <button ng-click="nextMonth()">&rarr;</button>
+        </div>
+        <div class="calendar-grid">
+            <div class="day day-header" ng-repeat="day in ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7']">
+                {{ day }}
+            </div>
+            <div class="day"
+                 ng-repeat="day in calendarDays"
+                 ng-class="{'current-day': day.isCurrentDay, 'selected-day': day.date === selectedDay}"
+                 ng-click="selectDay(day.date)">
+                {{ day.date }}
+                <div class="note-indicators">
+                    <div class="note-indicator"
+                         ng-repeat="note in day.notes"
+                         ng-style="{'background-color': note.color}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="note-list col-md-4">
+        <h3>Ghi chú cho ngày {{ selectedDay || 'đã chọn' }}:</h3>
+        <div class="d-flex">
+            <input type="text" ng-model="form.title" placeholder="Thêm ghi chú mới">
+            <input type="color" ng-model="form.Color" value="#ff0000">
+            <button ng-click="addNote(form,selectCalendaDate())">Thêm</button>
+        </div>
+        <div class="note-item" ng-repeat="note in currentDayNotes">
+            <div class="note-color" ng-style="{'background-color': note.color}"></div>
+            {{ note.text }}
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        var Month = 11 /* @(string.IsNullOrEmpty(ViewBag.Month) ? DateTime.Now.Month.ToString() : ViewBag.Month); */
+        
+    </script>
+}

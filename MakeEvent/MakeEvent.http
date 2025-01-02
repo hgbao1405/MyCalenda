@@ -1,0 +1,6 @@
+@MakeEvent_HostAddress = http://localhost:5033
+
+GET {{MakeEvent_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
